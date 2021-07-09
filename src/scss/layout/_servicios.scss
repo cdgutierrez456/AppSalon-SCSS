@@ -27,5 +27,13 @@
             font-size: 3rem;
             font-weight: $bold;
         }
+
+        &.seleccionado {
+            background: $azul;
+
+            p {
+                color: $blanco;
+            }
+        }
     }
 }
