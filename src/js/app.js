@@ -1,3 +1,4 @@
+let pagina = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
     iniciarApp();
@@ -5,6 +6,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function iniciarApp() {
     mostrarServicios();
+
+    // Resalta el div actual segun el tab al que se preciona
+    mostrarSeccion();
+
+    // Oculta o muestra una seccion segun el tab al que se preciona
+    cambiarSeccion();
+}
+
+function mostrarSeccion() {
+    const seccionActual = document.querySelector(`#paso-${pagina}`);
+    seccionActual.classList.add('mostrar-seccion');
+
+    // Resalta el tab actual
+    const tab = document.querySelector(`[data-paso="${pagina}"]`);
+    tab.classList.add('actual');
+}
+
+function cambiarSeccion() {
+    const enlaces = document.querySelectorAll('.tabs button');
+
+    enlaces.forEach( enlace => {
+        enlace.addEventListener('click', e => {
+            e.preventDefault();
+            pagina = parseInt(e.target.dataset.paso);
+
+            // Eliminar mostar-seccion de la seccion anterior
+            document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+
+            // Agrega mostar-seccion donde le dimos click
+            const seccion = document.querySelector(`#paso-${pagina}`);
+            seccion.classList.add('mostrar-seccion');
+
+            // Elimina la clase de actual en el tag anterior
+            document.querySelector('.tabs .actual').classList.remove('actual');
+
+            // Agrega la clas de actual en el nuevo tag
+            const tag = document.querySelector(`[data-paso="${pagina}"]`);
+            tag.classList.add('actual');
+        });
+    });
 }
 
 async function mostrarServicios() {
