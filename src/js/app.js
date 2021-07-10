@@ -1,4 +1,4 @@
-let pagina = 1;
+let pagina = 2;
 
 document.addEventListener('DOMContentLoaded', () => {
     iniciarApp();
