@@ -32,6 +32,9 @@ function iniciarApp() {
 
     // Almacenanco el nombre de la cita en el objeto
     nombreCita();
+
+    // Almacenando la fecha de la cita en el objeto
+    fechaCita();
 }
 
 function mostrarSeccion() {
@@ -258,4 +261,21 @@ function mostrarAlerta(mensaje, tipo) {
         alerta.remove();
     }, 2000);
 
+}
+
+function fechaCita() {
+    const fechaInput = document.querySelector('#fecha');
+    fechaInput.addEventListener('input', e => {
+
+        const dia = new Date(e.target.value).getUTCDay();
+        
+        if([0, 6].includes(dia)) {
+            e.preventDefault();
+            fechaInput.value = '';
+            mostrarAlerta('Fines de semana cerrado', 'error');
+        } else {
+            cita.fecha = fechaInput.value;
+        }
+        
+    })
 }
