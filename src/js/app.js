@@ -222,10 +222,40 @@ function nombreCita() {
 
         // Validacion de nombre texto
         if(nombreTexto === '' || nombreTexto.length < 3) {
-            console.log('invalido');
+            mostrarAlerta('Nombre no valido', 'error');
         } else {
+            const alerta = document.querySelector('.alerta');
+            if(alerta) {
+                alerta.remove();
+            }
             cita.nombre = nombreTexto;
         }
     })
 }
 
+function mostrarAlerta(mensaje, tipo) {
+
+    // Verificando si hay alertas previas para evitar repetir
+    const alertaPrevia = document.querySelector('.alerta');
+    if(alertaPrevia) {
+        return;
+    }
+
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+
+    if(tipo === 'error') {
+        alerta.classList.add('error');
+    }
+
+    // Insertar alerta el html
+    const formulario = document.querySelector('.formulario');
+    formulario.appendChild(alerta);
+
+    // Eliminar la alerta despues de algunos segundos
+    setTimeout(() => {
+        alerta.remove();
+    }, 2000);
+
+}
